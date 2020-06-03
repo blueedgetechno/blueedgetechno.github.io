@@ -1,1 +1,1 @@
-# blueedgetechno.github.io
+__My first website made from scratch__
