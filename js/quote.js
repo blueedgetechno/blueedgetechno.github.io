@@ -1,10 +1,8 @@
-fetch("js/quotes.txt")
-  .then(r => r.text())
-  .then(t => generate(t))
+fetch("js/quotes.txt").then(r => r.text()).then(t => generate(t))
 
 function generate(t) {
   var quotes = t.split('\n');
-  document.getElementById('quoteline').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  document.getElementById('quoteline').textContent = quotes[Math.floor(Math.random() * quotes.length)]
 }
 
 function give(date1, date2) {

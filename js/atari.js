@@ -1,12 +1,12 @@
 var win = window,
-    doc = document,
-    docElem = doc.documentElement,
-    body = doc.getElementsByTagName('body')[0],
-    x1 = win.innerWidth || docElem.clientWidth || body.clientWidth,
-    y1 = win.innerHeight|| docElem.clientHeight|| body.clientHeight;
+  doc = document,
+  docElem = doc.documentElement,
+  body = doc.getElementsByTagName('body')[0],
+  x1 = win.innerWidth || docElem.clientWidth || body.clientWidth,
+  y1 = win.innerHeight || docElem.clientHeight || body.clientHeight;
 
-var w=x1
-var h=y1-10
+var w = x1
+var h = y1 - 10
 
 function setup() {
   createCanvas(w, h);
@@ -15,6 +15,7 @@ function setup() {
 function f() {
   return 2 * Math.round(Math.random()) - 1
 }
+
 
 var l = 15,
   b = 80,
@@ -26,19 +27,21 @@ var l = 15,
   start = 1,
   dw = 50,
   sc = 0,
-  ran = m*10,
+  ran = m * 10,
   init = ran,
   tot = n * m,
   high = 0,
   p = (w % b) / 2,
   life = 3,
-  lp = 25
+  lp = 25,
+  ps=36,
+  pau=0
 
 class Stick {
   constructor(y, b) {
     this.y = y
     this.b = b
-    this.x = w/2
+    this.x = w / 2
   }
   draw() {
     fill(0)
@@ -91,19 +94,20 @@ class Ball {
     this.x += this.d[0] * this.spd
     this.y += this.d[1] * this.spd
 
-    if (this.y >= st.y - r && this.y <= st.y && this.x >= st.x && this.x <= st.x + st.b){
+    if (this.y >= st.y - r && this.y <= st.y && this.x >= st.x && this.x <= st.x + st.b) {
       this.d[1] = -1
-      if(this.d[0]*(st.x+st.b/2-this.x)>0) this.d[0]*=-1
+      if (this.d[0] * (st.x + st.b / 2 - this.x) > 0) this.d[0] *= -1
     }
     if (this.y <= this.r) this.d[1] *= -1
     if (this.x <= this.r || this.x > w - this.r) this.d[0] *= -1
 
     if (this.y >= h - this.r) {
       life -= 1
+      pau+=1
       if (life == 0) {
         over = 1
       } else {
-        this.x = w / 2
+        this.x = w/2+f()*Math.round(Math.random()*(mouseX)/2)
         this.y = h - 60
         this.d[0] = f()
         this.d[1] = -1
@@ -170,12 +174,18 @@ function drawlife() {
 var ball = new Ball(w / 2, h - 60)
 
 function draw() {
+  if(pau%ps){
+    pau+=1
+  }
+  if(pau%ps>2){
+    return
+  }
   if (!start) {
     if (!over) {
       background(255)
       drawlife()
       textSize(30)
-      text(sc, w / 2 - 5,35)
+      text(sc, w / 2 - 5, 35)
       st.draw()
       for (var i = 0; i < n * m; i++) {
         if (br[i].v) br[i].draw()
@@ -222,6 +232,7 @@ function reset() {
     over = 0
     sc = 0
     life = 3
+    pau=0
     tot = n * m
     for (var i = 0; i < n * m; i++) {
       br[i].v = 1

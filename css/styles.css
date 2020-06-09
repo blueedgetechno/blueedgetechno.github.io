@@ -90,17 +90,35 @@ body{
   margin-right: 15px;
   float: left;
   background-color: #12c9a5;
-  /* border: 0px solid */
   border-radius: 20%;
   box-shadow: 2px 5px 5px #2c9582;
   transition: 0.5s;
 }
 
 .post{
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 60px 0;
+  max-width: 900px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px;
+  border-radius: 15px;
+  transition: 0.5s;
 }
+
+.post:hover{
+  max-width: 900px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 60px;
+  transform: scale(1.02) translateZ(0);
+  box-shadow: 2px 5px 12px #aaa;
+  border-radius: 15px;
+  transition: 0.5s;
+}
+
 
 .about{
   max-width: 800px;
