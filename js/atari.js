@@ -7,9 +7,17 @@ var win = window,
 
 var w = x1
 var h = y1 - 10
+var hit,up
+
+function preload() {
+  hit = loadSound('../sounds/hit.mp3')
+  up = loadSound('../sounds/up.mp3')
+}
 
 function setup() {
   createCanvas(w, h);
+  hit.setVolume(0.6)
+  up.setVolume(0.4)
 }
 
 function f() {
@@ -96,11 +104,17 @@ class Ball {
 
     if (this.y >= st.y - r && this.y <= st.y && this.x >= st.x && this.x <= st.x + st.b) {
       this.d[1] = -1
+      up.play()
       if (this.d[0] * (st.x + st.b / 2 - this.x) > 0) this.d[0] *= -1
     }
-    if (this.y <= this.r) this.d[1] *= -1
-    if (this.x <= this.r || this.x > w - this.r) this.d[0] *= -1
-
+    if (this.y <= this.r){
+      this.d[1] *= -1
+      hit.play()
+    }
+    if (this.x <= this.r || this.x > w - this.r){
+      this.d[0] *= -1
+      hit.play()
+    }
     if (this.y >= h - this.r) {
       life -= 1
       pau+=1
@@ -124,11 +138,13 @@ class Ball {
         if (this.y < br[i].y) {
           if (br[i].y - this.y <= this.r) {
             this.d[1] *= -1
+            hit.play()
             br[i].inv()
           }
         } else {
           if (this.y - br[i].y <= br[i].l + this.r) {
             this.d[1] *= -1
+            hit.play()
             br[i].inv()
           }
         }
@@ -136,11 +152,13 @@ class Ball {
         if (this.x <= br[i].x) {
           if (br[i].x - this.x <= this.r && this.y >= br[i].y && this.y <= br[i].y + br[i].l) {
             this.d[0] *= -1
+            hit.play()
             br[i].inv()
           }
         } else {
           if (this.x - br[i].x <= this.r + br[i].b && this.y >= br[i].y && this.y <= br[i].y + br[i].l) {
             this.d[0] *= -1
+            hit.play()
             br[i].inv()
           }
         }

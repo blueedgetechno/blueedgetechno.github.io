@@ -8,6 +8,13 @@ var win = window,
 var w=x1
 var h=y1-10
 
+var hit
+
+function preload(){
+  hit = loadSound("../sounds/hit.mp3")
+}
+
+
 function setup() {
   createCanvas(w, h);
 }
@@ -71,17 +78,24 @@ function draw() {
       x += d[0] * spd
       y += d[1] * spd
 
-      if (y > h - r || y < r) d[1] *= -1
-
-      if (x >= loc - r && x <= loc && y >= mouseY && y <= mouseY + l) {
+      if (y > h - r || y < r){
+        hit.play()
+        d[1] *= -1;
+      }
+      if (x >= loc - r && x <= loc && y >= mouseY-r && y <= mouseY +r+ l) {
         d[0] *= -1
+        hit.play()
+        // hit.stop()
         c += 1
         if (c % z == 0) dk ^= 1
         if (c % diff == 0) spd += 1
       }
       go()
 
-      if (x >= opp - r &&x<=opp + b && y >= yx && y <= yx + l) d[0] *= -1
+      if (x >= opp - r &&x<=opp + b && y >= yx && y <= yx + l){
+        d[0] *= -1
+        hit.play()
+      }
 
       if (x < r) won = true
       if (x >= w) over = true

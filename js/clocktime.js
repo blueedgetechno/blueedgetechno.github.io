@@ -9,4 +9,13 @@ function updateClock() {
   var time=hr+" : "+mn+" : "+sc+" &nbsp; "+mer
   document.getElementById('time').innerHTML = time
 }
+
+var i=0;
+var k=1000;
+function go(){
+  i+=1
+  if(i==k) window.location.href = "rough.html"
+
+}
+
 setInterval(updateClock, 1000);

@@ -119,6 +119,21 @@ body{
   transition: 0.5s;
 }
 
+#hide {
+  border: none;
+  color: #555555;
+  padding: 0 1px 0 1px;
+  font-weight: bold;
+  background-color: inherit;
+  padding: 0;
+  font-size: 19px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+#hide, select {
+  outline: none;
+}
 
 .about{
   max-width: 800px;
